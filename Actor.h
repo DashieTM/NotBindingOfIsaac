@@ -1,43 +1,36 @@
 #pragma once
-#include <tuple>
+#include "Entity.h"
 
-class Actor
+class Actor : public Entity
 {
-    private:
-    
-    //movement
-    int speed;
-    int x;
-    int y;
-    //int z; probably not needed
+    protected:
+        //movement
+        int speed;
 
 
-    //combat
-    int baseAttack;
-    int baseDefense;
-    int baseHealth;
-    bool b_IsInvincible;
+        //combat
+        int baseAttack;
+        int baseDefense;
+        int baseHealth;
+        bool b_IsInvincible;
 
 
 
     public:
-    Actor();
-    Actor(int PosX, int PosY, int Aspeed, int damage, int defense, int health, bool invincible);
-    ~Actor();
-   
-    //public function declarations
-    void Move(int deltaX, int deltaY);
-    void TakeDamage(int value);
-
-    std::tuple<int, int> GetPos() const;
-    int GetPosX() const;
-    int GetPosY() const;
-    int GetBaseHealth() const;
-    int GetBaseDefense() const;
-    int GetBaseAttack() const;
-    bool CheckInvincibility() const;
-    //int GetPosZ() const; 
+        Actor();
+        Actor(int posX, int posY,int Aspeed, int attack, int defense, int health, bool invincible);
+        ~Actor();
     
+        //public function declarations
+        void Move(int deltaX, int deltaY);
+        void TakeDamage(int value);
+
+        int GetBaseHealth() const;
+        int GetBaseDefense() const;
+        int GetBaseAttack() const;
+
+        bool CheckInvincibility() const;
+        
 
 
 };

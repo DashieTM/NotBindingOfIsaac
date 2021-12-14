@@ -12,5 +12,5 @@ int main()
     gurri->Move(3,0);
     std::cout << gurri->GetPosX() << ", " << gurri->GetPosY() << std::endl;
     
-
+    std::cin.get();
 }
