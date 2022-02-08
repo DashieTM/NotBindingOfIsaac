@@ -1,3 +1,5 @@
+//NotBindingOfIsaac     A Shitgaem made by a noob
+
 #include "Actor.h"
 
 

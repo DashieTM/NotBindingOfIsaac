@@ -1,3 +1,4 @@
+//NotBindingOfIsaac     A Shitgaem made by a noob
 #include "Entity.h"
 
 Entity::Entity(int posX, int posY)

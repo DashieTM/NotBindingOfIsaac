@@ -1,3 +1,4 @@
+//NotBindingOfIsaac     A Shitgaem made by a noob
 #pragma once
 #include "Entity.h"
 

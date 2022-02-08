@@ -1,8 +1,9 @@
+//NotBindingOfIsaac     A Shitgaem made by a noob
 #include "Actor.h"
 #include <iostream>
 #include <string>
-#include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
 
 int main() 
 {
@@ -19,7 +20,7 @@ int main()
     //sf::Text text((char)gurri->GetPosX() + ", " +  (char)gurri->GetPosY(), font, 50);
     gurri->Move(3,0);
     sf::Text text2(std::to_string(gurri->GetPosX()) + ", " +  std::to_string(gurri->GetPosY()) , font, 50);
-    //sf::Text text3("Henlo Birb.", font, 50);
+    sf::Text text3("Henlo Birb.", font, 50);
     
 
     while (window.isOpen())
