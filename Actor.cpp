@@ -4,9 +4,14 @@
 
 
 
-Actor::Actor(int posX,int posY,int Aspeed, int attack, int defense, int health, bool invincible)
-    : speed(Aspeed), baseAttack(attack), baseDefense(defense), baseHealth(health), b_IsInvincible(invincible), Entity(posX, posY)
+Actor::Actor(int posX,int posY,int Aspeed, int attack, int defense, int health, bool invincible, int h, int i)
+    : speed(Aspeed), baseAttack(attack), baseDefense(defense), baseHealth(health), b_IsInvincible(invincible), width(h), length(i), Entity(posX, posY)
     {}
+
+Actor::~Actor()
+{
+    delete this;
+}
 
  void Actor::Move(int deltaX, int deltaY)
 {
@@ -40,4 +45,9 @@ void Actor::TakeDamage(int value)
     {
         baseHealth -= (value - baseDefense);
     }
-} 
+    else 
+    {
+       this->~Actor();
+    }
+}
+

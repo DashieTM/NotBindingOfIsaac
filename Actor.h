@@ -15,16 +15,21 @@ class Actor : public Entity
         int baseHealth;
         bool b_IsInvincible;
 
+        //figure
+        int width;
+        int length;
+
 
 
     public:
         Actor();
-        Actor(int posX, int posY,int Aspeed, int attack, int defense, int health, bool invincible);
+        Actor(int posX, int posY,int Aspeed, int attack, int defense, int health, bool invincible, int h, int i);
         ~Actor();
     
         //public function declarations
         void Move(int deltaX, int deltaY);
         void TakeDamage(int value);
+
 
         int GetBaseHealth() const;
         int GetBaseDefense() const;

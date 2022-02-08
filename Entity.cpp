@@ -5,6 +5,11 @@ Entity::Entity(int posX, int posY)
     : x(posX), y(posY)
     {}
 
+Entity::~Entity()
+{
+    delete this;
+}
+
 std::tuple<int,int> Entity::GetPos() const
 {
     return std::make_tuple(x,y);
