@@ -6,7 +6,7 @@ class Actor : public Entity
 {
     protected:
         //movement
-        int speed;
+        float speed;
 
 
         //combat
@@ -23,17 +23,17 @@ class Actor : public Entity
 
     public:
         Actor();
-        Actor(int posX, int posY,int Aspeed, int attack, int defense, int health, bool invincible, int h, int i);
+        Actor(float posX, float posY,float Aspeed, int attack, int defense, int health, bool invincible, int h, int i);
         ~Actor();
     
         //public function declarations
-        void Move(int deltaX, int deltaY);
+        void Move(float deltaX, float deltaY);
         void TakeDamage(int value);
-
 
         int GetBaseHealth() const;
         int GetBaseDefense() const;
         int GetBaseAttack() const;
+        float GetSpeed() const;
 
         bool CheckInvincibility() const;
         

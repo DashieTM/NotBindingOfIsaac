@@ -6,16 +6,16 @@
 class Entity
 {
     protected:
-        int x;
-        int y;
+        float x;
+        float y;
 
     public:
-        Entity(int x, int y);
+        Entity(float x, float y);
         ~Entity();
 
         std::tuple<int, int> GetPos() const;
-        int GetPosX() const;
-        int GetPosY() const;
+        float GetPosX() const;
+        float GetPosY() const;
 
 
 

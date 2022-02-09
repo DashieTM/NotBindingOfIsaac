@@ -1,7 +1,7 @@
 //NotBindingOfIsaac     A Shitgaem made by a noob
 #include "Actor.h"
 
-class Player : Actor
+class Player : public Actor
 {
 protected:
 

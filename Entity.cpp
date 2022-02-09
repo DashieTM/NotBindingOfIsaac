@@ -1,7 +1,7 @@
 //NotBindingOfIsaac     A Shitgaem made by a noob
 #include "Entity.h"
 
-Entity::Entity(int posX, int posY)
+Entity::Entity(float posX, float posY)
     : x(posX), y(posY)
     {}
 
@@ -15,12 +15,12 @@ std::tuple<int,int> Entity::GetPos() const
     return std::make_tuple(x,y);
 }
 
-int Entity::GetPosX() const
+float Entity::GetPosX() const
 {
     return x;
 }
 
-int Entity::GetPosY() const
+float Entity::GetPosY() const
 {
     return y;
 }

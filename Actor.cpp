@@ -4,7 +4,7 @@
 
 
 
-Actor::Actor(int posX,int posY,int Aspeed, int attack, int defense, int health, bool invincible, int h, int i)
+Actor::Actor(float posX,float posY,float Aspeed, int attack, int defense, int health, bool invincible, int h, int i)
     : speed(Aspeed), baseAttack(attack), baseDefense(defense), baseHealth(health), b_IsInvincible(invincible), width(h), length(i), Entity(posX, posY)
     {}
 
@@ -13,7 +13,7 @@ Actor::~Actor()
     delete this;
 }
 
- void Actor::Move(int deltaX, int deltaY)
+ void Actor::Move(float deltaX, float deltaY)
 {
     x += deltaX * speed;
     y += deltaY * speed;
@@ -32,6 +32,11 @@ int Actor::GetBaseDefense() const
 int Actor::GetBaseAttack() const
 {
     return baseAttack;
+}
+
+float Actor::GetSpeed() const
+{
+    return speed;
 }
 
 bool Actor::CheckInvincibility() const
