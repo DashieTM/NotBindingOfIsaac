@@ -1,6 +1,9 @@
 //NotBindingOfIsaac     A Shitgaem made by a noob
 #pragma once
 #include "Entity.h"
+#include "Inventory.h"
+
+
 
 class Actor : public Entity
 {
@@ -19,7 +22,8 @@ class Actor : public Entity
         int width;
         int length;
 
-
+        //inventory
+        Inventory *inv;
 
     public:
         Actor();
@@ -33,11 +37,16 @@ class Actor : public Entity
         void ModifyDamage(int power);
         void ModifyHealth(int power);
         void ModifyDefense(int power);
+        void UseItem(Item &item);
+        void AddItem(Item &item);
+        void RemoveItem(Item &item);
+
 
         int GetBaseHealth() const;
         int GetBaseDefense() const;
         int GetBaseAttack() const;
         float GetSpeed() const;
+        Inventory GetInventory();
 
         bool CheckInvincibility() const;
         

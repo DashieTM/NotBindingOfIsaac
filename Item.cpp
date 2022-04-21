@@ -14,6 +14,9 @@ Item::Item(int a, int b, int c, bool d, bool e)
         if (hasEffect) GenerateEffect();
     }
 
+Item::~Item() {};
+
+
 int Item::GetDroprate()
 {
     return droprate;
@@ -37,9 +40,9 @@ int Item::GetWeight()
 void Item::GenerateEffect() {
 
     srand(time(0)); 
-    int randomEffect = rand() % 3;
+    int randomEffect = rand() % 4;
     int randomPower = rand() % 200 + 50;
-    
+
     switch(randomEffect){
         case 0: ApplyDamageEffect(randomPower);
                 break;

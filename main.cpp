@@ -12,10 +12,12 @@
 int main() 
 {
     Display* disp = XOpenDisplay(NULL);
-    Screen*  scrn = DefaultScreenOfDisplay(disp);
-    int height = scrn->height;
-    int width  = scrn->width;
-    
+    //Screen*  scrn = DefaultScreenOfDisplay(disp);
+    //int height = scrn->height;
+    //int width  = scrn->width;
+    int height = 1000;
+    int width = 500;
+
     sf::Vector2f MiddleofScreen(960,540);
 
     sf::RenderWindow window(sf::VideoMode(width, height), "Not Binding Of Isaac");
@@ -32,6 +34,14 @@ int main()
     }
     sf::Sprite sprite(playersprite);
     sprite.setPosition(MiddleofScreen);
+
+    sf::Texture buff;
+    if (!buff.loadFromFile("buff.jpg"))
+    {
+        return EXIT_FAILURE;
+    }
+    sf::Sprite buffsprite(buff);
+    buffsprite.setPosition(MiddleofScreen + sf::Vector2f(200,200));
 
     sf::RectangleShape upperbound(sf::Vector2f(1000,5));
     upperbound.setPosition(MiddleofScreen + sf::Vector2f(-500,500));
@@ -50,6 +60,7 @@ int main()
 
     
     Player* gurri = new Player();
+    Item* sonic = new Item(1,1,1,false,true);
 
     //sf::Text text((char)gurri->GetPosX() + ", " +  (char)gurri->GetPosY(), font, 50);
     //gurri->Move(3,0);
@@ -66,6 +77,11 @@ int main()
             // Close window: exit
             if (event.type == sf::Event::Closed)
                 window.close();
+
+            if (sprite.getPosition() == buffsprite.getPosition())
+            {
+                gurri->UseItem(*sonic);
+            }
 
             if(event.type == sf::Event::KeyPressed)
             {
@@ -89,6 +105,12 @@ int main()
                     gurri->Move(1,0);
                     sprite.setPosition(gurri->GetPosX(),gurri->GetPosY());
                 }
+                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::F))
+                {
+                    Item *bs = new Item(1,1,1,false,true);
+                    gurri->UseItem(*bs);
+                    
+                }
             }
         }
         // Clear screen
@@ -101,6 +123,7 @@ int main()
         window.draw(leftbound);
         window.draw(rightbound);
         window.draw(sprite);
+        window.draw(buffsprite);
         //window.draw(text3);
         // Update the window
         window.display();

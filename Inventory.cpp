@@ -1,7 +1,7 @@
 #include "Inventory.h"
 
-Inventory::Inventory(int Size, bool Type, Actor* user) 
-: maxSize(Size), isUserInv(Type), owner(user)
+Inventory::Inventory(int Size, bool Type) 
+: maxSize(Size), isUserInv(Type)
 {
     Item *inv[Size];
 }
@@ -29,7 +29,7 @@ bool Inventory::isFull() {
 
 void Inventory::addItem(Item &item) {
     if (!isFull()) {
-        inv[currentSize - 1] = &item;
+        inv[currentSize] = &item;
         currentSize ++;
     }
 }
@@ -47,18 +47,3 @@ void Inventory::removeItem(Item &item) {
     }
 }
 
-void Inventory::useItem(Item &item) {
-    Item::Buff buff = item.GetEffect();
-    switch (buff.effect) {
-        case Item::Health:  owner->ModifyHealth(buff.power);
-                            break;
-        case Item::Defense: owner->ModifyDefense(buff.power);
-                            break;
-        case Item::Damage:  owner->ModifyDamage(buff.power);
-                            break;
-        case Item::Speed:   owner->ModifySpeed(buff.power);
-                            break;
-    }
-
-
-}

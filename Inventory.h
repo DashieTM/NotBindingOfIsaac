@@ -1,6 +1,5 @@
 #include "Entity.h"
 #include "Item.h"
-#include "Actor.h"
 
 class Inventory : public Entity {
 
@@ -8,7 +7,6 @@ protected:
     int currentSize;
     int maxSize;
     bool isUserInv;
-    Actor* owner;
 
     Item *inv[];
 
@@ -16,12 +14,11 @@ protected:
 
 public:
 
-Inventory(int Size, bool Type, Actor* user);
+Inventory(int Size, bool Type);
 ~Inventory();
 
 void addItem(Item &item);
 void removeItem(Item &item);
-void useItem(Item &item);
 bool isEmpty();
 bool isFull();
 int returnSize();

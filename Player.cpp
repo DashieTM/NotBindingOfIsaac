@@ -2,12 +2,14 @@
 #include "Player.h"
 
 Player::Player()
-: Actor(960,540,10,10,10,100,1,1,false)
+: Actor(960,540,1,10,10,100,1,1,false)
 {}
 
 Player::Player(int a, int b, int c)
-: money(a), level(b), kills(c), Actor(960,540,10,10,10,100,1,1,false)
-{}
+: money(a), level(b), kills(c), Actor(960,540,1,10,10,100,1,1,false)
+{
+    //Inventory(10,true);
+}
 
 int Player::GetMoney()
 {
