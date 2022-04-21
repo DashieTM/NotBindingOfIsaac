@@ -11,6 +11,7 @@ class Entity
 
     public:
         Entity(float x, float y);
+        Entity();
         ~Entity();
 
         std::tuple<int, int> GetPos() const;

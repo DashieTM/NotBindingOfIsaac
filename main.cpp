@@ -8,6 +8,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <X11/Xlib.h>
+
 int main() 
 {
     Display* disp = XOpenDisplay(NULL);

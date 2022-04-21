@@ -56,3 +56,18 @@ void Actor::TakeDamage(int value)
     }
 }
 
+void Actor::ModifyDamage(int power) {
+    baseAttack += baseAttack * (power / 100);
+}
+
+void Actor::ModifyHealth(int power) {
+    baseHealth += baseHealth * (power / 100);
+}
+
+void Actor::ModifyDefense(int power) {
+    baseDefense += baseDefense * (power / 100);
+}
+
+void Actor::ModifySpeed(int power) {
+    speed += speed * ((float)power / 100.f);
+}

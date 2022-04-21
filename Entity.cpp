@@ -5,6 +5,10 @@ Entity::Entity(float posX, float posY)
     : x(posX), y(posY)
     {}
 
+Entity::Entity() 
+: x(-1), y(-1)
+{}
+
 Entity::~Entity()
 {
     delete this;

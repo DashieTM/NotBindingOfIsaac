@@ -47,6 +47,7 @@ lectures/
 *.stackdump
 *.exe
 *.out
+*.sh
 # Linker output
 *.ilk
 *.map

@@ -29,6 +29,10 @@ class Actor : public Entity
         //public function declarations
         void Move(float deltaX, float deltaY);
         void TakeDamage(int value);
+        void ModifySpeed(int power);
+        void ModifyDamage(int power);
+        void ModifyHealth(int power);
+        void ModifyDefense(int power);
 
         int GetBaseHealth() const;
         int GetBaseDefense() const;
