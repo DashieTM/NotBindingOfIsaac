@@ -13,9 +13,9 @@ class Actor : public Entity
 
 
         //combat
-        int baseAttack;
-        int baseDefense;
-        int baseHealth;
+        float baseAttack;
+        float baseDefense;
+        float baseHealth;
         bool b_IsInvincible;
 
         //figure
@@ -23,30 +23,31 @@ class Actor : public Entity
         int length;
 
         //inventory
-        Inventory *inv;
+        Inventory inv;
 
     public:
         Actor();
-        Actor(float posX, float posY,float Aspeed, int attack, int defense, int health, bool invincible, int h, int i);
+        Actor(float posX, float posY,float Aspeed, float attack, float defense, float health, bool invincible, int h, int i);
         ~Actor();
     
         //public function declarations
         void Move(float deltaX, float deltaY);
-        void TakeDamage(int value);
-        void ModifySpeed(int power);
-        void ModifyDamage(int power);
-        void ModifyHealth(int power);
-        void ModifyDefense(int power);
+        void TakeDamage(float value);
+        void ModifySpeed(float power);
+        void ModifyDamage(float power);
+        void ModifyHealth(float power);
+        void ModifyDefense(float power);
         void UseItem(Item &item);
         void AddItem(Item &item);
         void RemoveItem(Item &item);
+        void UseLastItem();
 
 
-        int GetBaseHealth() const;
-        int GetBaseDefense() const;
-        int GetBaseAttack() const;
+        float GetBaseHealth() const;
+        float GetBaseDefense() const;
+        float GetBaseAttack() const;
         float GetSpeed() const;
-        Inventory GetInventory();
+        Inventory* GetInventory();
 
         bool CheckInvincibility() const;
         

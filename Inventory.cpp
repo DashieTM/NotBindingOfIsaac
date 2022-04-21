@@ -3,7 +3,6 @@
 Inventory::Inventory(int Size, bool Type) 
 : maxSize(Size), isUserInv(Type)
 {
-    Item *inv[Size];
 }
 
 Inventory::~Inventory() {
@@ -29,21 +28,24 @@ bool Inventory::isFull() {
 
 void Inventory::addItem(Item &item) {
     if (!isFull()) {
-        inv[currentSize] = &item;
+        arr[currentSize] = item;
         currentSize ++;
     }
 }
 
-void Inventory::removeItem(Item &item) {
-    if (!isEmpty()) {
-        int offset = 0;
-        for (int i = 1 ; i < maxSize ; i++) {
-            if (inv[i] == &item) {
-                offset = 1;
-                continue;
-            }
-            inv[i - offset] = inv[i];
-        }
-    }
+Item* Inventory::removeLastItem() {
+        //int offset = 0;
+        //for (int i = 1 ; i < maxSize ; i++) {
+            //if (&arr[i] == &item) {
+             //   offset = 1;
+               // continue;
+           // }
+           // inv[i - offset] = inv[i];
+       // }
+        currentSize--;
+        return &arr[currentSize];
 }
 
+void Inventory::NoEffect() {
+        arr[currentSize].SetEffectNone(); 
+}

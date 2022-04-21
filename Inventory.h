@@ -4,13 +4,11 @@
 class Inventory : public Entity {
 
 protected:
-    int currentSize;
-    int maxSize;
+    int currentSize = 0;
+    int maxSize = 5;
     bool isUserInv;
-
-    Item *inv[];
-
-
+    Item arr[5];
+    Item* inv = arr;
 
 public:
 
@@ -18,9 +16,11 @@ Inventory(int Size, bool Type);
 ~Inventory();
 
 void addItem(Item &item);
-void removeItem(Item &item);
+Item* removeLastItem();
 bool isEmpty();
 bool isFull();
 int returnSize();
 int returnMaxSize();
+
+void NoEffect();
 };

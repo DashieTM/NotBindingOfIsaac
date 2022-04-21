@@ -7,6 +7,8 @@
 /*Item::Item()
     : value(0), weight(0), droprate(0), IsUsable(false)
     {}*/
+Item::Item():value(-1), weight(-1), droprate(-1), IsUsable(false), hasEffect(false)
+ {}
 
 Item::Item(int a, int b, int c, bool d, bool e)
     : value(a), weight(b), droprate(c), IsUsable(d), hasEffect(e)
@@ -41,7 +43,7 @@ void Item::GenerateEffect() {
 
     srand(time(0)); 
     int randomEffect = rand() % 4;
-    int randomPower = rand() % 200 + 50;
+    float randomPower = ((float) (rand() % 300 + 150)) / 100;
 
     switch(randomEffect){
         case 0: ApplyDamageEffect(randomPower);
@@ -56,26 +58,31 @@ void Item::GenerateEffect() {
     }
 }
 
-void Item::ApplyDamageEffect(int power) {
+void Item::ApplyDamageEffect(float power) {
     buff.effect = Damage;
     buff.power = power;
 }
 
-void Item::ApplyDefenseEffect(int power) {
+void Item::ApplyDefenseEffect(float power) {
     buff.effect = Defense;
     buff.power = power;
 }
 
-void Item::ApplyHealthEffect(int power) {
+void Item::ApplyHealthEffect(float power) {
     buff.effect = Health;
     buff.power = power;
 }
 
-void Item::ApplySpeedEffect(int power) {
+void Item::ApplySpeedEffect(float power) {
     buff.effect = Speed;
     buff.power = power;
+}
+
+void Item::SetEffectNone() {
+    buff.effect = None;
 }
 
 Item::Buff Item::GetEffect() {
     return buff;
 }
+

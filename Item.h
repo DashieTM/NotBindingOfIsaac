@@ -6,9 +6,9 @@ class Item : public Entity
 {
 public:
 
-    enum Effect {Health, Damage, Defense, Speed};
+    enum Effect {Health, Damage, Defense, Speed, None};
 
-    struct Buff {Effect effect; int power;};
+    struct Buff {Effect effect; float power;};
 
 protected:
 
@@ -23,17 +23,17 @@ protected:
 private:
 
     void GenerateEffect();
-    void ApplyHealthEffect(int power);
-    void ApplyDamageEffect(int power);
-    void ApplyDefenseEffect(int power);
-    void ApplySpeedEffect(int power);
+    void ApplyHealthEffect(float power);
+    void ApplyDamageEffect(float power);
+    void ApplyDefenseEffect(float power);
+    void ApplySpeedEffect(float power);
 
 public:
 
     
 
     Item(int a, int b, int c, bool d, bool e);
-   // Item();
+    Item();
     ~Item();
 
     int GetValue();
@@ -42,5 +42,6 @@ public:
     int GetUsablestatus();
     Buff GetEffect();
 
+    void SetEffectNone();
 
 };

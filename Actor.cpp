@@ -4,11 +4,9 @@
 
 
 
-Actor::Actor(float posX,float posY,float Aspeed, int attack, int defense, int health, bool invincible, int h, int i)
-    : speed(Aspeed), baseAttack(attack), baseDefense(defense), baseHealth(health), b_IsInvincible(invincible), width(h), length(i), Entity(posX, posY)
-    {
-        //Inventory(3,false);
-    }
+Actor::Actor(float posX,float posY,float Aspeed, float attack, float defense, float health, bool invincible, int h, int i)
+    : speed(Aspeed), baseAttack(attack), baseDefense(defense), baseHealth(health), b_IsInvincible(invincible), width(h), length(i), Entity(posX, posY), inv(Inventory(5,false))
+    {}
 
 Actor::~Actor()
 {
@@ -21,17 +19,17 @@ Actor::~Actor()
     y += deltaY * speed;
 }  
 
-int Actor::GetBaseHealth() const
+float Actor::GetBaseHealth() const
 {
     return baseHealth;
 }
 
-int Actor::GetBaseDefense() const
+float Actor::GetBaseDefense() const
 {
     return baseDefense;
 }
 
-int Actor::GetBaseAttack() const
+float Actor::GetBaseAttack() const
 {
     return baseAttack;
 }
@@ -41,8 +39,8 @@ float Actor::GetSpeed() const
     return speed;
 }
 
-Inventory Actor::GetInventory() {
-    return *inv;
+Inventory* Actor::GetInventory() {
+    return &inv;
 }
 
 bool Actor::CheckInvincibility() const
@@ -50,7 +48,7 @@ bool Actor::CheckInvincibility() const
     return b_IsInvincible;
 }
 
-void Actor::TakeDamage(int value)
+void Actor::TakeDamage(float value)
 {
     if(baseHealth > 0 && !b_IsInvincible)
     {
@@ -62,20 +60,20 @@ void Actor::TakeDamage(int value)
     }
 }
 
-void Actor::ModifyDamage(int power) {
-    baseAttack *= (power / 100);
+void Actor::ModifyDamage(float power) {
+    baseAttack *= power;
 }
 
-void Actor::ModifyHealth(int power) {
-    baseHealth *= (power / 100);
+void Actor::ModifyHealth(float power) {
+    baseHealth *= power;
 }
 
-void Actor::ModifyDefense(int power) {
-    baseDefense *= (power / 100);
+void Actor::ModifyDefense(float power) {
+    baseDefense *= power;
 }
 
-void Actor::ModifySpeed(int power) {
-    speed *= ((float)power / 100.f);
+void Actor::ModifySpeed(float power) {
+    speed *= power;
 }
 
 void Actor::UseItem(Item &item) {
@@ -89,14 +87,22 @@ void Actor::UseItem(Item &item) {
                             break;
         case Item::Speed:   ModifySpeed(buff.power);
                             break;
+        case Item::None:    break;
     }
 
 }
 
 void Actor::AddItem(Item &item) {
-    inv->addItem(item);
+    inv.addItem(item);
 }
 
 void Actor::RemoveItem(Item &item) {
-    inv->removeItem(item);
+    inv.removeLastItem();
+}
+
+void Actor::UseLastItem() {
+    if (!inv.isEmpty()) {
+        UseItem(*inv.removeLastItem());
+        inv.NoEffect();
+    }
 }
