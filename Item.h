@@ -17,7 +17,8 @@ protected:
     int droprate;
     bool IsUsable;
     bool hasEffect;
-    
+    int index;
+
     Buff buff;
 
 private:
@@ -40,8 +41,10 @@ public:
     int GetWeight();
     int GetDroprate();
     int GetUsablestatus();
+    int returnIndex();
     Buff GetEffect();
-
+    
+    void addIndex(int ind);
     void SetEffectNone();
 
 };

@@ -9,6 +9,7 @@ protected:
     bool isUserInv;
     Item arr[5];
     Item* inv = arr;
+    Item empty = Item();
 
 public:
 
@@ -16,11 +17,12 @@ Inventory(int Size, bool Type);
 ~Inventory();
 
 void addItem(Item &item);
-Item* removeLastItem();
+void removeLastItem();
 bool isEmpty();
 bool isFull();
 int returnSize();
 int returnMaxSize();
 
-void NoEffect();
+Item* returnItem(int index);
+Item* returnLastItem();
 };

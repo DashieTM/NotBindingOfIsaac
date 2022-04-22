@@ -28,12 +28,17 @@ bool Inventory::isFull() {
 
 void Inventory::addItem(Item &item) {
     if (!isFull()) {
+        item.addIndex(currentSize);
         arr[currentSize] = item;
         currentSize ++;
     }
 }
 
-Item* Inventory::removeLastItem() {
+Item* Inventory::returnItem(int index) {
+    return &arr[index];
+}
+
+void Inventory::removeLastItem() {
         //int offset = 0;
         //for (int i = 1 ; i < maxSize ; i++) {
             //if (&arr[i] == &item) {
@@ -42,10 +47,11 @@ Item* Inventory::removeLastItem() {
            // }
            // inv[i - offset] = inv[i];
        // }
+       
         currentSize--;
-        return &arr[currentSize];
+        arr[currentSize] = empty;
 }
 
-void Inventory::NoEffect() {
-        arr[currentSize].SetEffectNone(); 
+Item* Inventory::returnLastItem() {
+    return &arr[currentSize - 1];
 }

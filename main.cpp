@@ -94,9 +94,10 @@ int main()
                 window.close();
             if ( calculateAbsDistance(playerLocation, buffLocation) < 20.0 && !buffUsed)
             {
-                buffUsed = true;
-                Item* sonic = new Item(1,1,1,false,true);
-                gurri->AddItem(*sonic);
+                if (!gurri->GetInventory()->isFull()) {
+                    Item* sonic = new Item(1,1,1,false,true);
+                    gurri->AddItem(*sonic);
+                }
             }
             if ( calculateAbsDistance(playerLocation, upperboundPos) < 5.0 || calculateAbsDistance(playerLocation, lowerboundPos) < 5.0 || calculateAbsDistance(playerLocation, rightboundPos) < 5.0 || calculateAbsDistance(playerLocation, leftboundPos) < 5.0) {
                 isDead = true;
@@ -138,7 +139,7 @@ int main()
         sf::Text text2(std::to_string(gurri->GetBaseDefense()), font, 12);
         sf::Text text3(std::to_string(gurri->GetBaseHealth()), font, 12);
         sf::Text text4(std::to_string(gurri->GetSpeed()), font, 12);
-        sf::Text text5(std::to_string(gurri->GetInventory()->isEmpty()), font, 12);
+        sf::Text text5(std::to_string(gurri->GetInventory()->returnSize()), font, 12);
         text2.setPosition(sf::Vector2f(text2.getPosition().x,text.getPosition().y + 20));
         text3.setPosition(sf::Vector2f(text3.getPosition().x,text2.getPosition().y + 20));
         text4.setPosition(sf::Vector2f(text4.getPosition().x,text3.getPosition().y + 20));

@@ -7,11 +7,11 @@
 /*Item::Item()
     : value(0), weight(0), droprate(0), IsUsable(false)
     {}*/
-Item::Item():value(-1), weight(-1), droprate(-1), IsUsable(false), hasEffect(false)
+Item::Item():value(-1), weight(-1), droprate(-1), IsUsable(false), hasEffect(false), index(-1)
  {}
 
 Item::Item(int a, int b, int c, bool d, bool e)
-    : value(a), weight(b), droprate(c), IsUsable(d), hasEffect(e)
+    : value(a), weight(b), droprate(c), IsUsable(d), hasEffect(e), index(-1)
     {
         if (hasEffect) GenerateEffect();
     }
@@ -80,6 +80,14 @@ void Item::ApplySpeedEffect(float power) {
 
 void Item::SetEffectNone() {
     buff.effect = None;
+}
+
+void Item::addIndex(int ind) {
+    index = ind;
+}
+
+int Item::returnIndex() {
+    return index;
 }
 
 Item::Buff Item::GetEffect() {

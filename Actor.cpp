@@ -102,7 +102,7 @@ void Actor::RemoveItem(Item &item) {
 
 void Actor::UseLastItem() {
     if (!inv.isEmpty()) {
-        UseItem(*inv.removeLastItem());
-        inv.NoEffect();
+        UseItem(*inv.returnLastItem());
+        inv.removeLastItem();
     }
 }
