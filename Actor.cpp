@@ -4,8 +4,8 @@
 
 
 
-Actor::Actor(float posX,float posY,float Aspeed, float attack, float defense, float health, bool invincible, int h, int i)
-    : speed(Aspeed), baseAttack(attack), baseDefense(defense), baseHealth(health), b_IsInvincible(invincible), width(h), length(i), Entity(posX, posY), inv(Inventory(5,false))
+Actor::Actor(float posX,float posY,float Aspeed, float attack, float defense, float health, bool invincible, int h, int i, std::string pic)
+    : speed(Aspeed), baseAttack(attack), baseDefense(defense), baseHealth(health), b_IsInvincible(invincible), width(h), length(i), Entity(posX, posY), sprite(pic), inv(Inventory(5,false))
     {}
 
 Actor::~Actor()
@@ -92,6 +92,14 @@ void Actor::UseItem(Item &item) {
 
 }
 
+void Actor::SetSprite(std::string pic) {
+    sprite = pic;
+}
+
+std::string Actor::GetSprite() {
+    return sprite;
+}
+
 void Actor::AddItem(Item &item) {
     inv.addItem(item);
 }
@@ -105,4 +113,12 @@ void Actor::UseLastItem() {
         UseItem(*inv.returnLastItem());
         inv.removeLastItem();
     }
+}
+
+void Actor::Destroy() {
+    b_isAlive = false;
+}
+
+bool Actor::GetAliveStatus() const {
+    return b_isAlive;
 }

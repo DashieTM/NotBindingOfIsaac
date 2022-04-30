@@ -2,6 +2,7 @@
 #pragma once
 #include "Entity.h"
 #include "Inventory.h"
+#include <string>
 
 
 
@@ -17,6 +18,7 @@ class Actor : public Entity
         float baseDefense;
         float baseHealth;
         bool b_IsInvincible;
+        bool b_isAlive = true;
 
         //figure
         int width;
@@ -25,9 +27,11 @@ class Actor : public Entity
         //inventory
         Inventory inv;
 
+        std::string sprite;
+
     public:
         Actor();
-        Actor(float posX, float posY,float Aspeed, float attack, float defense, float health, bool invincible, int h, int i);
+        Actor(float posX, float posY,float Aspeed, float attack, float defense, float health, bool invincible, int h, int i, std::string pic);
         ~Actor();
     
         //public function declarations
@@ -41,6 +45,9 @@ class Actor : public Entity
         void AddItem(Item &item);
         void RemoveItem(Item &item);
         void UseLastItem();
+        void SetSprite(std::string pic);
+        void Destroy();
+
 
 
         float GetBaseHealth() const;
@@ -48,8 +55,10 @@ class Actor : public Entity
         float GetBaseAttack() const;
         float GetSpeed() const;
         Inventory* GetInventory();
+        std::string GetSprite();
 
         bool CheckInvincibility() const;
+        bool GetAliveStatus() const;
         
 
 

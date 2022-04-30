@@ -12,8 +12,12 @@
 
 double calculateAbsDistance(sf::Vector2f &frst, sf::Vector2f &scnd);
 
+w
+
 int main() 
 {
+    Player* gurri = new Player();
+
     Display* disp = XOpenDisplay(NULL);
     //Screen*  scrn = DefaultScreenOfDisplay(disp);
     //int height = scrn->height;
@@ -31,7 +35,7 @@ int main()
     
 
     sf::Texture playersprite;
-    if (!playersprite.loadFromFile("bestpone.png"))
+    if (!playersprite.loadFromFile(gurri->GetSprite()))
     {
         return EXIT_FAILURE;
     }
@@ -62,7 +66,7 @@ int main()
     lowerbound.setFillColor(sf::Color(255,255,255));
 
     
-    Player* gurri = new Player();
+  
     
 
     sf::Vector2f upperboundPos = upperbound.getPosition();
@@ -132,6 +136,10 @@ int main()
                         gurri->UseLastItem();
                         buffUsed = false;
                     }
+                }
+                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::G))
+                {
+                  
                 }
             }
         }
