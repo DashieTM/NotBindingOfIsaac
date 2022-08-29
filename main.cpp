@@ -12,7 +12,6 @@
 
 double calculateAbsDistance(sf::Vector2f &frst, sf::Vector2f &scnd);
 
-w
 
 int main() 
 {
@@ -22,8 +21,8 @@ int main()
     //Screen*  scrn = DefaultScreenOfDisplay(disp);
     //int height = scrn->height;
     //int width  = scrn->width;
-    int height = 1000;
-    int width = 500;
+    int height = 1080;
+    int width = 1920;
 
     sf::Vector2f MiddleofScreen(960,540);
 

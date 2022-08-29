@@ -2,7 +2,7 @@
 #include "Player.h"
 
 Player::Player()
-: Actor(960,540,5,10,10,100,1,1,false, "")
+: Actor(960,540,5,10,10,100,1,1,false, "bestpone.png")
 {}
 
 Player::Player(int a, int b, int c)
@@ -53,3 +53,4 @@ void Player::LevelUp(int value)
     level += value;
     expneeded *= 2;
 }
+

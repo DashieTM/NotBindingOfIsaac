@@ -47,7 +47,6 @@ lectures/
 *.stackdump
 *.exe
 *.out
-*.sh
 # Linker output
 *.ilk
 *.map
@@ -146,5 +145,3 @@ ipch/
 
 # Visual Studio Trace Files
 *.e2e
-ActorDebug
-mainDebug
