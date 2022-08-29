@@ -2,11 +2,11 @@
 #include "Player.h"
 
 Player::Player()
-: Actor(960,540,5,10,10,100,1,1,false, "bestpone.png")
+: Actor(960,540,0.05,10,10,100,1,1,false, "bestpone.png")
 {}
 
 Player::Player(int a, int b, int c)
-: money(a), level(b), kills(c), Actor(960,540,5,10,10,100,1,1,false, "bestpone.png")
+: money(a), level(b), kills(c), Actor(960,540,0.05,10,10,100,1,1,false, "bestpone.png")
 {
     //Inventory(10,true);
 }

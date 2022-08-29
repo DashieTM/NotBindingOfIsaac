@@ -28,3 +28,4 @@ float Entity::GetPosY() const
 {
     return y;
 }
+

@@ -9,6 +9,7 @@
 #include <SFML/Graphics.hpp>
 #include <X11/Xlib.h>
 #include "math.h"
+#include "ctime"
 
 double calculateAbsDistance(sf::Vector2f &frst, sf::Vector2f &scnd);
 
@@ -18,6 +19,7 @@ int main()
     Player* gurri = new Player();
 
     Display* disp = XOpenDisplay(NULL);
+    XAutoRepeatOff(disp);
     //Screen*  scrn = DefaultScreenOfDisplay(disp);
     //int height = scrn->height;
     //int width  = scrn->width;
@@ -27,7 +29,9 @@ int main()
     sf::Vector2f MiddleofScreen(960,540);
 
     sf::RenderWindow window(sf::VideoMode(width, height), "Not Binding Of Isaac");
-    
+   
+    window.setKeyRepeatEnabled(false);
+
     sf::Font font;
     if (!font.loadFromFile("sansation.ttf"))
         return EXIT_FAILURE;
@@ -76,6 +80,12 @@ int main()
 
     bool buffUsed = false;
     bool isDead = false;
+    bool buffAvailable = true;
+    time_t stamp1 = time(0);
+    bool keyLeft = false;
+    bool keyRight = false;
+    bool keyUp = false;
+    bool keyDown = false;
 
     //sf::Text text((char)gurri->GetPosX() + ", " +  (char)gurri->GetPosY(), font, 50);
     //gurri->Move(3,0);
@@ -86,7 +96,9 @@ int main()
     while (window.isOpen())
     {
         sf::Vector2f playerLocation = sprite.getPosition();
-        
+        if (!buffAvailable && time(0) - stamp1 > 3) {
+          buffAvailable = true;
+        }
         // Process events
         sf::Event event;
         while (window.pollEvent(event))
@@ -97,9 +109,11 @@ int main()
                 window.close();
             if ( calculateAbsDistance(playerLocation, buffLocation) < 20.0 && !buffUsed)
             {
-                if (!gurri->GetInventory()->isFull()) {
+                if (!gurri->GetInventory()->isFull() && buffAvailable ) {
+                    stamp1 = time(0);
                     Item* sonic = new Item(1,1,1,false,true);
                     gurri->AddItem(*sonic);
+                    buffAvailable = false;
                 }
             }
             if ( calculateAbsDistance(playerLocation, upperboundPos) < 5.0 || calculateAbsDistance(playerLocation, lowerboundPos) < 5.0 || calculateAbsDistance(playerLocation, rightboundPos) < 5.0 || calculateAbsDistance(playerLocation, leftboundPos) < 5.0) {
@@ -109,25 +123,17 @@ int main()
             
             if(event.type == sf::Event::KeyPressed)
             {
-                if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-                {
-                    gurri->Move(-1,0);
-                    sprite.setPosition(gurri->GetPosX(),gurri->GetPosY());
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+                  keyRight = true;
                 }
-                if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-                {
-                    gurri->Move(0,1);
-                    sprite.setPosition(gurri->GetPosX(),gurri->GetPosY());
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+                  keyLeft = true;
                 }
-                if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-                {
-                    gurri->Move(0,-1);
-                    sprite.setPosition(gurri->GetPosX(),gurri->GetPosY());
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+                  keyUp = true;
                 }
-                if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-                {
-                    gurri->Move(1,0);
-                    sprite.setPosition(gurri->GetPosX(),gurri->GetPosY());
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+                  keyDown = true;
                 }
                  if(sf::Keyboard::isKeyPressed(sf::Keyboard::F))
                 {
@@ -141,6 +147,37 @@ int main()
                   
                 }
             }
+            if(event.type == sf::Event::KeyReleased)
+            {
+                if (!sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+                  keyRight = false;
+                }
+                if (!sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+                  keyLeft = false;
+                }
+                if (!sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+                  keyUp = false;
+                }
+                if (!sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+                  keyDown = false;
+                }
+            }
+        }
+        if (keyLeft) {
+          gurri->Move(-1,0);
+          sprite.setPosition(gurri->GetPosX(),gurri->GetPosY());
+        }
+        if (keyRight) {
+          gurri->Move(1,0);
+          sprite.setPosition(gurri->GetPosX(),gurri->GetPosY());
+        }
+        if (keyUp) {
+          gurri->Move(0,-1);
+          sprite.setPosition(gurri->GetPosX(),gurri->GetPosY());
+        }
+        if (keyDown) {
+          gurri->Move(0,1);
+          sprite.setPosition(gurri->GetPosX(),gurri->GetPosY());
         }
         sf::Text text(std::to_string(gurri->GetBaseAttack()), font, 12);
         sf::Text text2(std::to_string(gurri->GetBaseDefense()), font, 12);
@@ -167,7 +204,9 @@ int main()
         if (!isDead) {
             window.draw(sprite);
         }
-        window.draw(buffsprite);
+        if (buffAvailable) {
+            window.draw(buffsprite);
+        }
         //window.draw(text3);
         // Update the window
         window.display();

@@ -41,7 +41,7 @@ int Item::GetWeight()
 
 void Item::GenerateEffect() {
 
-    srand(time(0)); 
+    srand(std::time(0)); 
     int randomEffect = rand() % 4;
     float randomPower = ((float) (rand() % 300 + 150)) / 100;
 
